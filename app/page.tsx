@@ -185,7 +185,7 @@ export default function Home() {
           
         </div>
 <div className="flex flex-col items-center justify-center align-middle mt-14">
-  <h1 className="lg:text-8xl text-4xl font-semibold">
+  <h1 className="lg:text-8xl text-2xl font-semibold">
   Want To Work With Us ?
   </h1>
   <h5 className="lg:text-4xl text-xl">We'd Be Glad To Work</h5>
