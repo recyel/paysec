@@ -1,101 +1,199 @@
+"use client"
+import SupportedPlatforms from "./components/supported"
 import Image from "next/image";
+import * as React from "react"
+import GeoLocation from "./components/geo";
+import { TrendingUp } from "lucide-react"
+import { Label, Pie, PieChart } from "recharts"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+import ManualReview from "./components/manual";
+import DdosProtection from "./components/ddos";
 
+const chartData = [
+  { browser: "Rate Limited", visitors: 4, fill: "#7f27ff" },
+  { browser: "Blocked", visitors: 74, fill: "#4901B0" },
+  { browser: "Refunded", visitors: 14, fill: "#4D3DFD" },
+  { browser: "Chargebacks", visitors: 8, fill: "#ffff" },
+]
+const chartConfig = {
+  visitors: {
+    label: "Visitors",
+  },
+  chrome: {
+    label: "Chrome",
+    color: "hsl(var(--chart-1))",
+  },
+  safari: {
+    label: "Safari",
+    color: "hsl(var(--chart-2))",
+  },
+  firefox: {
+    label: "Firefox",
+    color: "hsl(var(--chart-3))",
+  },
+  edge: {
+    label: "Edge",
+    color: "hsl(var(--chart-4))",
+  },
+  other: {
+    label: "Other",
+    color: "hsl(var(--chart-5))",
+  },
+} satisfies ChartConfig
+export function Component() {
+  const totalVisitors = React.useMemo(() => {
+    return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
+  }, [])
+}
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className=" font-[family-name:var(--font-geist-sans)] text-white bg-black">
+      <div className="px-4 py-2 border-b">
+        <div>
+        <h1 className="mt-10 scroll-m-20 text-2xl font-semibold tracking-tight transition-colors first:mt-0">Vulnity</h1>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </div>
+     <div className="lg:flex lg:justify-between lg:items-center lg:align-middle lg:px-72 lg:mt-12 lg:space-x-6 ">
+      <div className="mt-12 items-center flex flex-col ">
+        <h1 className="text-4xl lg:text-5xl font-semibold ">Frustated With </h1>
+        <h1 className="text-4xl lg:text-5xl font-semibold ">Fraud Payment ?</h1>
+        <h1 className="text-2xl font-semibold opacity-60 lg:text-5xl">We Can Fix It</h1>
+      </div>
+      <div className="hidden lg:block w-1 h-64 bg-gray-500 opacity-55">
+        
+      </div>
+      <div>
+      <Card className="flex flex-col bg-black text-white border-none">
+      <CardHeader className="items-center pb-0">
+        <CardTitle>Global Scale</CardTitle>
+        <CardDescription>January - October 2024</CardDescription>
+      </CardHeader>
+      <CardContent className="flex-1 pb-0 ">
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square max-h-[250px]"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <PieChart>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <Pie
+              data={chartData}
+              dataKey="visitors"
+              nameKey="browser"
+              innerRadius={76}
+              strokeWidth={5}
+            >
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    return (
+                      <text
+                        x={viewBox.cx}
+                        y={viewBox.cy}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                      >
+                        <tspan
+                          x={viewBox.cx}
+                          y={viewBox.cy}
+                          className="fill-foreground text-3xl font-bold"
+                        >
+                         
+                        </tspan>
+                        
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 24}
+                          className="fill-muted-foreground"
+                        >
+                          11,022
+                        </tspan>
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 12}
+                          className="fill-muted-foreground text-white"
+                        >
+                         Payments Secured
+                        </tspan>
+                      </text>
+                    )
+                  }
+                }}
+              />
+            </Pie>
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 font-medium leading-none">
+         Payments Secured By 99.9% <TrendingUp className="h-4 w-4" />
+        </div>
+        <div className="leading-none text-muted-foreground text-center">
+          Payments Passed Through Multiple Authentications And Rules.
+        </div>
+      </CardFooter>
+    </Card>
+      </div>
+      </div>
+      <div>
+      
+      </div>
+      <div className="mt-14 lg:mt-24 items-center justify-center flex flex-col">
+      <h1 className="text-2xl font-semibold lg:text-5xl ">Want To Secure Your Site ? </h1>
+      <h1 className="text-2xl font-semibold opacity-60 lg:text-2xl"> What You Can Expect  </h1>
+      <div className="mt-12">
+      <SupportedPlatforms />
+      <div className="w-full h-1 bg-white m-8 opacity-55"></div>
+      <div className="  flex flex-col space-y-4 mt-8 text-center opacity-60 lg:hidden">
+      <h1 className="text-xl font-regular">Custom Rules Upon Geo Location</h1>
+      <h1 className="text-xl font-regular">Manually Reviewing Risk Payments </h1>
+      <h1 className="text-xl font-regular">Ddos Protection </h1>
+      <h1 className="text-xl font-regular">Rate Limiting </h1>
+      <h1 className="text-xl font-regular">Customer Support</h1>
+      <h1 className="text-xl font-regular">Rate Limiting </h1>
+      </div>
+
+      </div>
+      
+      </div>
+      <div className="mt-12 hidden lg:block px-8">
+      <GeoLocation />
+      <ManualReview />
+      <DdosProtection />
+      </div>
+      <div className="mt-12 bg-black">
+        <div className="w-full h-0.5">
+
+        </div>
+        <div>
+          
+        </div>
+<div className="flex flex-col items-center justify-center align-middle mt-14">
+  <h1 className="lg:text-8xl text-4xl font-semibold">
+  Want To Work With Us ?
+  </h1>
+  <h5 className="lg:text-4xl text-xl">We'd Be Glad To Work</h5>
+
+  <div className="mt-8 mb-60 border-b">
+    <span className="opacity-50">Email Us At </span><span className=" text-blue-600">onboard@vulnity.io</span>
+  </div>
+</div>
+      </div>
     </div>
   );
 }
