@@ -19,8 +19,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import ManualReview from "./components/manual";
+
 import DdosProtection from "./components/ddos";
+import ManualReview from "./components/manual";
 
 const chartData = [
   { browser: "Rate Limited", visitors: 4, fill: "#7f27ff" },
